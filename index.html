@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ismael Amador · Desarrollador web e IA</title>
+<meta name="description" content="Portafolio de Ismael Amador Serrano, desarrollador web full-stack (Vue, Laravel) especializándose en inteligencia artificial.">
+<meta name="theme-color" content="#04050d">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ismael Amador · Desarrollador web e IA">
+<meta property="og:description" content="Sigue la señal a través de mi red neuronal: proyectos, formación y contacto.">
+<meta property="og:image" content="https://ismael04-ctrl.github.io/foto.jpg">
+<meta property="og:url" content="https://ismael04-ctrl.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2304050d'/%3E%3Ccircle cx='32' cy='32' r='9' fill='%235ef2ff'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%239b7bff' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@property --a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+:root{
+  --bg:#04050d; --ink:#eef1ff; --muted:#a6aed3; --dim:#6f77a0;
+  --cyan:#5ef2ff; --violet:#9b7bff; --pink:#ff5fa2;
+  --glass:rgba(10,12,30,.62); --stroke:rgba(155,123,255,.24);
+  --radius:22px; --mono:'JetBrains Mono',ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.no-webgl{background:radial-gradient(ellipse at 20% 10%,rgba(155,123,255,.25),transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(94,242,255,.18),transparent 50%),var(--bg);background-attachment:fixed}
+a{color:inherit}
+#bg{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse at center,transparent 50%,rgba(4,5,13,.8))}
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:20;background:rgba(155,123,255,.12)}
+.progress b{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink));transform-origin:left;transform:scaleX(0)}
+header.top{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:18px clamp(16px,4vw,40px);pointer-events:none}
+header.top>*{pointer-events:auto}
+.logo,.lang{height:44px;border:1px solid var(--stroke);border-radius:12px;background:var(--glass);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);display:grid;place-items:center;text-decoration:none;font:700 15px var(--mono)}
+.logo{width:44px;color:var(--cyan)}
+.lang{padding:0 14px;color:var(--ink);cursor:pointer;font-size:13px;letter-spacing:.06em;transition:border-color .3s,color .3s}
+.lang:hover{border-color:var(--cyan);color:var(--cyan)}
+nav.rail{position:fixed;right:clamp(12px,2.4vw,32px);top:50%;transform:translateY(-50%);z-index:10;display:flex;flex-direction:column;gap:18px}
+.rail a{display:flex;align-items:center;justify-content:flex-end;gap:12px;text-decoration:none;color:var(--muted);font:500 12px var(--mono)}
+.rail a span{opacity:0;transform:translateX(6px);transition:opacity .3s,transform .3s}
+.rail a:hover span,.rail a.active span{opacity:1;transform:none}
+.rail a.active span{color:var(--cyan)}
+.rail a i{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--violet);transition:all .3s}
+.rail a.active i{background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 14px var(--cyan);transform:scale(1.25)}
+main{position:relative;z-index:2}
+.stage{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:110px clamp(70px,8vw,130px) 110px clamp(16px,7vw,110px)}
+.stage[data-side=left]{justify-content:flex-start}
+.stage[data-side=right]{justify-content:flex-end}
+.stage[data-side=center]{justify-content:center;text-align:center}
+.card{width:100%;max-width:500px;background:var(--glass);border:1px solid var(--stroke);border-radius:var(--radius);padding:clamp(22px,3vw,36px);-webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);box-shadow:0 30px 80px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.05);opacity:0;transform:translateY(40px) scale(.98);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.card.in{opacity:1;transform:none}
+.card.wide{max-width:660px}
+.card.bare{background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;max-width:920px;padding:0}
+.tag{display:block;font:500 12px var(--mono);color:var(--cyan);letter-spacing:.04em;margin-bottom:14px}
+h2{font-size:clamp(28px,4vw,40px);line-height:1.1;letter-spacing:-.02em;margin-bottom:18px}
+p{color:var(--muted)}
+p+p{margin-top:12px}
+strong{color:var(--ink);font-weight:600}
+.hero h1{font-size:clamp(46px,10vw,116px);line-height:.95;letter-spacing:-.045em;font-weight:700;text-shadow:0 0 60px rgba(4,5,13,.9)}
+.grad{background:linear-gradient(90deg,var(--cyan),var(--violet) 55%,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-size:clamp(16px,2.2vw,21px);margin:24px auto 34px;max-width:580px;color:var(--ink);opacity:.82;text-shadow:0 0 30px rgba(4,5,13,.95)}
+.btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:999px;font:600 15px 'Space Grotesk',system-ui,sans-serif;text-decoration:none;border:1px solid var(--stroke);color:var(--ink);background:var(--glass);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);cursor:pointer;transition:transform .25s,box-shadow .25s,border-color .25s}
+.btn svg{width:18px;height:18px;flex:none}
+.btn.primary{background:linear-gradient(90deg,var(--cyan),var(--violet));color:#05061a;border-color:transparent}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px -10px var(--violet);border-color:var(--cyan)}
+.hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font:12px var(--mono);color:var(--dim);display:flex;flex-direction:column;align-items:center;gap:10px;white-space:nowrap}
+.hint i{width:1px;height:42px;background:linear-gradient(var(--cyan),transparent);animation:drip 2.2s ease-in-out infinite;transform-origin:top}
+@keyframes drip{0%{transform:scaleY(0);opacity:1}60%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+.about-head{display:flex;align-items:center;gap:18px;margin-bottom:20px}
+.about-head h2{margin:0}
+.ring{--a:0deg;flex:none;width:96px;height:96px;padding:3px;border-radius:50%;background:conic-gradient(from var(--a),var(--cyan),var(--violet),var(--pink),var(--cyan));animation:spin 6s linear infinite;box-shadow:0 0 30px -6px var(--violet)}
+@keyframes spin{to{--a:360deg}}
+.avatar{position:relative;width:100%;height:100%;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:radial-gradient(circle at 30% 30%,#2a2160,#0b0c22);font:700 26px var(--mono);color:var(--cyan)}
+.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;list-style:none;padding:0}
+.facts li{font:12px var(--mono);padding:7px 12px;border-radius:999px;border:1px solid var(--stroke);background:rgba(155,123,255,.08)}
+.timeline{list-style:none;padding:0;position:relative}
+.timeline::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--cyan),var(--violet),transparent)}
+.timeline li{position:relative;padding:0 0 22px 36px}
+.timeline li:last-child{padding-bottom:0}
+.timeline li::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:2px solid var(--violet)}
+.timeline li.now::before{border-color:var(--cyan);background:var(--cyan);box-shadow:0 0 16px var(--cyan)}
+.when{font:12px var(--mono);color:var(--cyan)}
+.timeline h3{font-size:18px;line-height:1.3;margin:3px 0 2px}
+.timeline p{font-size:14px}
+.projects{display:grid;gap:16px}
+.proj{border:1px solid var(--stroke);border-radius:16px;padding:20px;background:rgba(255,255,255,.02);transition:border-color .3s,transform .3s}
+.proj:hover{border-color:rgba(94,242,255,.45);transform:translateY(-2px)}
+.proj.featured{background:linear-gradient(135deg,rgba(94,242,255,.08),rgba(155,123,255,.1))}
+.proj.soon{border-style:dashed}
+.proj-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.proj h3{font-size:22px;line-height:1.2}
+.badge{font:11px var(--mono);padding:4px 10px;border-radius:999px;background:rgba(255,95,162,.12);color:var(--pink);border:1px solid rgba(255,95,162,.3)}
+.proj p{font-size:15px}
+.feat{margin:12px 0 0;padding-left:18px;color:var(--muted);font-size:14px}
+.feat li::marker{color:var(--cyan)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;list-style:none;padding:0}
+.chips li{font:12px var(--mono);padding:5px 10px;border-radius:8px;background:rgba(94,242,255,.07);color:var(--cyan);border:1px solid rgba(94,242,255,.18)}
+.more{display:inline-flex;align-items:center;gap:7px;margin-top:16px;font:500 13px var(--mono);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--violet);padding-bottom:2px;transition:color .3s,border-color .3s}
+.more:hover{color:var(--cyan);border-color:var(--cyan)}
+.more svg{width:15px;height:15px}
+.group{margin-bottom:16px}
+.group h3,.sub-h{font:500 12px var(--mono);color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.group .chips{margin-top:8px}
+.sub-h{margin:24px 0 12px}
+.langs{display:grid;gap:12px}
+.lang-row{display:grid;grid-template-columns:1fr auto;gap:6px;font-size:15px}
+.lang-row small{font:12px var(--mono);color:var(--muted);align-self:center}
+.bar{grid-column:1/-1;height:6px;border-radius:9px;background:rgba(255,255,255,.07);overflow:hidden}
+.bar b{display:block;height:100%;width:var(--w);border-radius:9px;background:linear-gradient(90deg,var(--cyan),var(--violet));transform-origin:left;transform:scaleX(0);transition:transform 1.4s .35s cubic-bezier(.2,.8,.2,1)}
+.card.in .bar b{transform:scaleX(1)}
+.contact .card{max-width:600px}
+.contact p{max-width:440px;margin:0 auto 26px}
+.mail{display:inline-block;font-size:clamp(17px,3.4vw,26px);font-weight:600;text-decoration:none;margin-bottom:22px;word-break:break-all}
+.mail:hover{color:var(--cyan)}
+footer{position:relative;z-index:2;text-align:center;padding:0 16px 30px;font:12px var(--mono);color:var(--dim)}
+noscript{display:block;position:relative;z-index:3;padding:12px;text-align:center;color:var(--muted)}
+@media (max-width:760px){
+  .stage,.stage[data-side]{justify-content:center;padding:96px 16px 70px}
+  .card,.card.wide{max-width:100%}
+  nav.rail{display:none}
+  .about-head{flex-direction:column;align-items:flex-start}
+  .stage[data-side=center] .about-head{align-items:center}
+}
+@media (prefers-reduced-motion:reduce){
+  .card{transform:none;transition:opacity .4s}
+  .ring,.hint i{animation:none}
+  .bar b{transition:none}
+}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><b></b></div>
+
+<header class="top">
+  <a class="logo" href="#inicio" aria-label="Inicio">IA</a>
+  <button class="lang" id="lang" type="button" aria-label="Switch to English">EN</button>
+</header>
+
+<nav class="rail" aria-label="Secciones">
+  <a href="#inicio"><span data-i18n="nav.0">Inicio</span><i></i></a>
+  <a href="#sobre-mi"><span data-i18n="nav.1">Sobre mí</span><i></i></a>
+  <a href="#formacion"><span data-i18n="nav.2">Formación</span><i></i></a>
+  <a href="#proyectos"><span data-i18n="nav.3">Proyectos</span><i></i></a>
+  <a href="#skills"><span data-i18n="nav.4">Skills</span><i></i></a>
+  <a href="#contacto"><span data-i18n="nav.5">Contacto</span><i></i></a>
+</nav>
+
+<main>
+  <section class="stage hero" id="inicio" data-side="center">
+    <div class="card bare">
+      <span class="tag" data-i18n="hero.tag">// neurona 00 · input</span>
+      <h1>Ismael<br><span class="grad">Amador Serrano</span></h1>
+      <p class="sub" data-i18n="hero.sub">Desarrollador web full-stack, ahora especializándome en inteligencia artificial.</p>
+      <div class="btns">
+        <a class="btn primary" href="#proyectos" data-i18n="hero.cta1">Ver proyectos</a>
+        <a class="btn" href="#contacto" data-i18n="hero.cta2">Contactar</a>
+      </div>
+    </div>
+    <div class="hint" aria-hidden="true"><span data-i18n="hero.hint">Haz scroll y sigue la señal</span><i></i></div>
+  </section>
+
+  <section class="stage" id="sobre-mi" data-side="left">
+    <div class="card">
+      <span class="tag" data-i18n="about.tag">// neurona 01 · sobre mí</span>
+      <div class="about-head">
+        <div class="ring"><div class="avatar">IA<img src="foto.jpg" alt="Foto de Ismael Amador" onerror="this.remove()"></div></div>
+        <h2 data-i18n="about.title">Del navegador a la red neuronal</h2>
+      </div>
+      <p data-i18n="about.p1">Soy Técnico Superior en <strong>Desarrollo de Aplicaciones Web</strong>. Me gusta construir aplicaciones completas: la base de datos, la API y la interfaz que usa la gente.</p>
+      <p data-i18n="about.p2">Ahora estoy dando el salto a la <strong>inteligencia artificial y el big data</strong>, para unir el desarrollo web con modelos que aprenden de los datos.</p>
+      <p data-i18n="about.p3">Responsable, con buena comunicación y acostumbrado a trabajar en equipo con metodologías ágiles.</p>
+      <ul class="facts">
+        <li data-i18n="about.f1">📍 Torrent, Valencia</li>
+        <li data-i18n="about.f2">🚗 Vehículo propio</li>
+        <li data-i18n="about.f3">☁️ Certificado AWS</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="stage" id="formacion" data-side="right">
+    <div class="card">
+      <span class="tag" data-i18n="edu.tag">// neurona 02 · formación</span>
+      <h2 data-i18n="edu.title">Capas de entrenamiento</h2>
+      <ol class="timeline">
+        <li class="now">
+          <span class="when" data-i18n="edu.1w">2026 — actualidad</span>
+          <h3 data-i18n="edu.1t">Curso de Big Data e Inteligencia Artificial</h3>
+          <p data-i18n="edu.1p">En curso · Python, machine learning y deep learning</p>
+        </li>
+        <li>
+          <span class="when">2023 — 2026</span>
+          <h3 data-i18n="edu.2t">CFGS Desarrollo de Aplicaciones Web</h3>
+          <p>IES Serra Perenxisa · Torrent</p>
+        </li>
+        <li>
+          <span class="when" data-i18n="edu.3w">AWS</span>
+          <h3 data-i18n="edu.3t">Certificación AWS de fundamentos cloud</h3>
+          <p data-i18n="edu.3p">Servicios básicos de la nube de Amazon Web Services</p>
+        </li>
+        <li>
+          <span class="when">2020 — 2022</span>
+          <h3 data-i18n="edu.4t">Bachillerato de Humanidades</h3>
+          <p>IES Veles e Vents · Torrent</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="stage" id="proyectos" data-side="left">
+    <div class="card wide">
+      <span class="tag" data-i18n="proj.tag">// neurona 03 · proyectos</span>
+      <h2 data-i18n="proj.title">Lo que he construido</h2>
+      <div class="projects">
+        <article class="proj featured">
+          <div class="proj-top"><h3>Esperanza Azul</h3><span class="badge" data-i18n="proj.1b">Trabajo Final de Ciclo</span></div>
+          <p data-i18n="proj.1p">Plataforma de voluntariado con gamificación que conecta a voluntarios con ONG. Tiene tres roles (voluntario, ONG y administrador) y cada uno tiene su propio panel.</p>
+          <ul class="feat" data-i18n="proj.1f">
+            <li>Puntos, niveles automáticos e insignias</li>
+            <li>Ranking público de voluntarios</li>
+            <li>Eventos con búsqueda, filtros, inscripción y reseñas</li>
+            <li>Certificados de participación descargables</li>
+            <li>API REST con autenticación por tokens</li>
+          </ul>
+          <ul class="chips"><li>Vue 3</li><li>Pinia</li><li>Vue Router</li><li>Laravel 13</li><li>Sanctum</li><li>MySQL</li></ul>
+          <a class="more" href="https://github.com/ismael04-ctrl/esperanza-azul" target="_blank" rel="noopener"><span data-i18n="proj.code">Ver código</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </article>
+        <article class="proj">
+          <div class="proj-top"><h3 data-i18n="proj.2h">API de Reservas de Hotel</h3><span class="badge" data-i18n="proj.2b">En equipo</span></div>
+          <p data-i18n="proj.2p">API en PHP para gestionar las reservas de un hotel: crear reservas y consultar disponibilidad, con base de datos MySQL y consumida desde el frontend con Fetch. Hecha junto a Carlos.</p>
+          <ul class="chips"><li>PHP</li><li>MySQL</li><li>API REST</li><li>Fetch</li></ul>
+          <a class="more" href="https://github.com/ismael04-ctrl/Hotel-API-Ismael-Carlos" target="_blank" rel="noopener"><span data-i18n="proj.code2">Ver código</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </article>
+        <article class="proj soon">
+          <div class="proj-top"><h3 data-i18n="proj.3h">Proyectos de IA</h3><span class="badge" data-i18n="proj.3b">Entrenando…</span></div>
+          <p data-i18n="proj.3p">Modelos de machine learning y deep learning con Python y NumPy. Muy pronto aquí.</p>
+          <ul class="chips"><li>Python</li><li>NumPy</li><li>Deep learning</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" id="skills" data-side="right">
+    <div class="card">
+      <span class="tag" data-i18n="sk.tag">// neurona 04 · skills</span>
+      <h2 data-i18n="sk.title">Pesos y conexiones</h2>
+      <div class="group"><h3>Frontend</h3><ul class="chips"><li>Vue 3</li><li>React</li><li>JavaScript</li><li>HTML</li><li>Tailwind CSS</li><li>Bootstrap</li></ul></div>
+      <div class="group"><h3>Backend</h3><ul class="chips"><li>Laravel</li><li>PHP</li><li>API REST</li><li>Sanctum</li></ul></div>
+      <div class="group"><h3 data-i18n="sk.db">Bases de datos</h3><ul class="chips"><li>MySQL</li><li>PostgreSQL</li><li>Oracle</li></ul></div>
+      <div class="group"><h3 data-i18n="sk.ai">IA y datos</h3><ul class="chips"><li>Python</li><li>NumPy</li><li>Machine learning</li><li>Deep learning</li></ul></div>
+      <div class="group"><h3 data-i18n="sk.tools">Cloud y herramientas</h3><ul class="chips"><li>AWS</li><li>Git</li><li>GitHub</li><li>Figma</li><li>Scrum</li></ul></div>
+      <h3 class="sub-h" data-i18n="sk.langs">Idiomas</h3>
+      <div class="langs">
+        <div class="lang-row"><span data-i18n="sk.l1">Castellano</span><small data-i18n="sk.l1n">Nativo</small><div class="bar"><b style="--w:100%"></b></div></div>
+        <div class="lang-row"><span data-i18n="sk.l2">Inglés</span><small data-i18n="sk.l2n">B1 · preparando B2</small><div class="bar"><b style="--w:62%"></b></div></div>
+        <div class="lang-row"><span data-i18n="sk.l3">Valenciano</span><small>A2</small><div class="bar"><b style="--w:38%"></b></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage contact" id="contacto" data-side="center">
+    <div class="card">
+      <span class="tag" data-i18n="ct.tag">// neurona 05 · output</span>
+      <h2 data-i18n="ct.title">¿Construimos algo juntos?</h2>
+      <p data-i18n="ct.p">Busco mi primera oportunidad como desarrollador. Si tienes un proyecto o una vacante, escríbeme.</p>
+      <a class="mail grad" href="mailto:ismaelark98@gmail.com">ismaelark98@gmail.com</a>
+      <div class="btns">
+        <button class="btn primary" type="button" id="copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span data-i18n="ct.copy">Copiar email</span></button>
+        <a class="btn" href="https://github.com/ismael04-ctrl" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/ismael-amador-serrano-63ba772b4/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 0 0-4 0"/></svg>LinkedIn</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer data-i18n="footer">© 2026 Ismael Amador Serrano · Hecho a mano con Three.js</footer>
+<noscript>Activa JavaScript para ver la red neuronal en 3D.</noscript>
+
+<script>
+(function(){
+  var EN={
+    "nav.0":"Home","nav.1":"About","nav.2":"Education","nav.3":"Projects","nav.4":"Skills","nav.5":"Contact",
+    "hero.tag":"// neuron 00 · input",
+    "hero.sub":"Full-stack web developer, now specialising in artificial intelligence.",
+    "hero.cta1":"See projects","hero.cta2":"Get in touch","hero.hint":"Scroll and follow the signal",
+    "about.tag":"// neuron 01 · about me","about.title":"From the browser to the neural network",
+    "about.p1":"I'm a qualified <strong>Web Application Developer</strong> (Higher VET Diploma). I enjoy building complete applications: the database, the API and the interface people actually use.",
+    "about.p2":"Now I'm moving into <strong>artificial intelligence and big data</strong>, to bring web development together with models that learn from data.",
+    "about.p3":"Responsible, a clear communicator and used to working in teams with agile methodologies.",
+    "about.f1":"📍 Torrent, Valencia (Spain)","about.f2":"🚗 Own vehicle","about.f3":"☁️ AWS certified",
+    "edu.tag":"// neuron 02 · education","edu.title":"Training layers",
+    "edu.1w":"2026 — present","edu.1t":"Big Data & Artificial Intelligence course","edu.1p":"In progress · Python, machine learning and deep learning",
+    "edu.2t":"Higher VET Diploma in Web Application Development",
+    "edu.3w":"AWS","edu.3t":"AWS cloud fundamentals certification","edu.3p":"Core Amazon Web Services cloud services",
+    "edu.4t":"Baccalaureate in Humanities",
+    "proj.tag":"// neuron 03 · projects","proj.title":"What I've built",
+    "proj.1b":"Final degree project",
+    "proj.1p":"A gamified volunteering platform that connects volunteers with NGOs. It has three roles (volunteer, NGO and admin), each with its own dashboard.",
+    "proj.1f":"<li>Points, automatic levels and badges</li><li>Public volunteer leaderboard</li><li>Events with search, filters, sign-ups and reviews</li><li>Downloadable participation certificates</li><li>REST API with token authentication</li>",
+    "proj.code":"View code","proj.code2":"View code",
+    "proj.2h":"Hotel Booking API","proj.2b":"Team project",
+    "proj.2p":"A PHP API to manage hotel bookings: create reservations and check availability, backed by MySQL and consumed from the frontend with Fetch. Built together with Carlos.",
+    "proj.3h":"AI projects","proj.3b":"Training…","proj.3p":"Machine learning and deep learning models with Python and NumPy. Coming soon.",
+    "sk.tag":"// neuron 04 · skills","sk.title":"Weights and connections",
+    "sk.db":"Databases","sk.ai":"AI & data","sk.tools":"Cloud & tools","sk.langs":"Languages",
+    "sk.l1":"Spanish","sk.l1n":"Native","sk.l2":"English","sk.l2n":"B1 · working towards B2","sk.l3":"Valencian",
+    "ct.tag":"// neuron 05 · output","ct.title":"Shall we build something together?",
+    "ct.p":"I'm looking for my first opportunity as a developer. If you have a project or an opening, drop me a line.",
+    "ct.copy":"Copy email","ct.copied":"Copied!",
+    "footer":"© 2026 Ismael Amador Serrano · Handmade with Three.js"
+  };
+  var nodes=[].slice.call(document.querySelectorAll('[data-i18n]'));
+  var ES={"ct.copied":"¡Copiado!"};
+  nodes.forEach(function(n){ES[n.dataset.i18n]=n.innerHTML;});
+  var titles={es:document.title,en:"Ismael Amador · Web & AI Developer"};
+  var btn=document.getElementById('lang');
+  var cur='es';
+  function setLang(l){
+    var d=l==='en'?EN:ES;
+    nodes.forEach(function(n){var v=d[n.dataset.i18n];if(v!=null)n.innerHTML=v;});
+    document.documentElement.lang=l;
+    document.title=titles[l];
+    btn.textContent=l==='en'?'ES':'EN';
+    btn.setAttribute('aria-label',l==='en'?'Cambiar a español':'Switch to English');
+    try{localStorage.setItem('lang',l);}catch(e){}
+    cur=l;measure();
+  }
+  btn.addEventListener('click',function(){setLang(cur==='es'?'en':'es');});
+
+  var stages=[].slice.call(document.querySelectorAll('.stage'));
+  var links=[].slice.call(document.querySelectorAll('.rail a'));
+  var bar=document.querySelector('.progress b');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var A=[];
+  function measure(){A=stages.map(function(s){return Math.max(0,s.offsetTop+(s.offsetHeight-innerHeight)/2);});onScroll();}
+  function onScroll(){
+    var y=scrollY,best=0,bd=Infinity;
+    A.forEach(function(a,i){var d=Math.abs(a-y);if(d<bd){bd=d;best=i;}});
+    links.forEach(function(l,i){l.classList.toggle('active',i===best);});
+    var max=document.documentElement.scrollHeight-innerHeight;
+    bar.style.transform='scaleX('+(max>0?Math.min(1,y/max):0)+')';
+  }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',measure);
+  addEventListener('load',measure);
+
+  [].slice.call(document.querySelectorAll('a[href^="#"]')).forEach(function(a){
+    a.addEventListener('click',function(e){
+      var i=stages.findIndex(function(s){return '#'+s.id===a.getAttribute('href');});
+      if(i<0)return;
+      e.preventDefault();
+      scrollTo({top:A[i],behavior:reduce?'auto':'smooth'});
+    });
+  });
+
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.12});
+  document.querySelectorAll('.card').forEach(function(c){io.observe(c);});
+
+  var copy=document.getElementById('copy');
+  copy.addEventListener('click',function(){
+    var mail='ismaelark98@gmail.com';
+    var done=function(){var s=copy.querySelector('span');s.textContent=(cur==='en'?EN:ES)['ct.copied'];setTimeout(function(){s.innerHTML=(cur==='en'?EN:ES)['ct.copy'];},1800);};
+    if(navigator.clipboard)navigator.clipboard.writeText(mail).then(done,function(){location.href='mailto:'+mail;});
+    else location.href='mailto:'+mail;
+  });
+
+  var saved=null;try{saved=localStorage.getItem('lang');}catch(e){}
+  var start=saved||((navigator.language||'es').toLowerCase().indexOf('es')===0?'es':'en');
+  if(start==='en')setLang('en');else measure();
+})();
+</script>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+
+const canvas = document.getElementById('bg');
+const mobile = matchMedia('(max-width: 760px)').matches;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+let renderer = null;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: !mobile, powerPreference: 'high-performance' });
+} catch (e) {
+  document.body.classList.add('no-webgl');
+}
+if (renderer) init();
+
+function init() {
+  const PR = Math.min(devicePixelRatio || 1, mobile ? 1.5 : 1.75);
+  renderer.setPixelRatio(PR);
+  renderer.setSize(innerWidth, innerHeight, false);
+  renderer.setClearColor(0x04050d, 1);
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x04050d, 0.026);
+  const camera = new THREE.PerspectiveCamera(58, innerWidth / innerHeight, 0.1, 220);
+
+  const stages = [...document.querySelectorAll('.stage')];
+  const K = stages.length;
+  const C = {
+    cyan: new THREE.Color(0x5ef2ff),
+    violet: new THREE.Color(0x9b7bff),
+    pink: new THREE.Color(0xff5fa2),
+    white: new THREE.Color(0xffffff)
+  };
+  const clamp01 = x => Math.min(1, Math.max(0, x));
+  const lerp = (a, b, f) => a + (b - a) * f;
+
+  const keyPos = [];
+  const pts = [new THREE.Vector3(0, -1.5, 18)];
+  for (let i = 0; i < K; i++) {
+    const p = new THREE.Vector3(Math.sin(i * 1.9 + 0.4) * 5, Math.cos(i * 1.4) * 2.6, -i * 22);
+    keyPos.push(p);
+    pts.push(p);
+  }
+  const last = keyPos[K - 1];
+  pts.push(new THREE.Vector3(last.x + 4, last.y - 2, last.z - 22));
+  const curve = new THREE.CatmullRomCurve3(pts, false, 'centripetal');
+  const L = curve.getLength();
+  const SAMPLES = 1500;
+  const spaced = curve.getSpacedPoints(SAMPLES);
+  const keyU = keyPos.map(p => {
+    let b = 0, bd = Infinity;
+    for (let j = 0; j <= SAMPLES; j++) {
+      const d = spaced[j].distanceToSquared(p);
+      if (d < bd) { bd = d; b = j; }
+    }
+    return b / SAMPLES;
+  });
+
+  const glowMat = (react = false) => new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: { value: 0 },
+      uPR: { value: PR },
+      uReact: { value: react ? 1 : 0 },
+      uPulse: { value: new THREE.Vector3() }
+    },
+    vertexShader: `
+      attribute float aSize;
+      attribute vec3 aColor;
+      attribute float aPhase;
+      uniform float uTime, uPR, uReact;
+      uniform vec3 uPulse;
+      varying vec3 vC;
+      varying float vA;
+      void main() {
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        gl_Position = projectionMatrix * mv;
+        float z = -mv.z;
+        float b = uReact * smoothstep(7.0, 0.0, distance(position, uPulse));
+        float tw = 0.78 + 0.22 * sin(uTime * 1.6 + aPhase);
+        gl_PointSize = min(aSize * (1.0 + b * 1.4) * tw * uPR * 130.0 / max(z, 0.1), 220.0 * uPR);
+        vC = mix(aColor, vec3(0.37, 0.95, 1.0), b * 0.8) * (1.0 + b * 1.5);
+        vA = smoothstep(0.4, 3.0, z) * smoothstep(95.0, 25.0, z);
+      }`,
+    fragmentShader: `
+      varying vec3 vC;
+      varying float vA;
+      void main() {
+        float d = length(gl_PointCoord - 0.5);
+        float g = smoothstep(0.5, 0.0, d);
+        g *= g;
+        float core = smoothstep(0.14, 0.0, d);
+        gl_FragColor = vec4(vC * (g + core * 1.4) * vA, 1.0);
+      }`,
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+
+  const pointsGeo = n => {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(n * 3), 3));
+    g.setAttribute('aSize', new THREE.BufferAttribute(new Float32Array(n), 1));
+    g.setAttribute('aColor', new THREE.BufferAttribute(new Float32Array(n * 3), 3));
+    const ph = new Float32Array(n);
+    for (let i = 0; i < n; i++) ph[i] = Math.random() * Math.PI * 2;
+    g.setAttribute('aPhase', new THREE.BufferAttribute(ph, 1));
+    return g;
+  };
+
+  const N = mobile ? 230 : 420;
+  const nodes = [];
+  for (let i = 0; i < N; i++) {
+    const c = curve.getPointAt(Math.random());
+    const r = 2.4 + Math.pow(Math.random(), 0.8) * 12;
+    nodes.push(c.add(new THREE.Vector3().randomDirection().multiplyScalar(r)));
+  }
+  const ng = pointsGeo(N);
+  const pal = [C.violet, C.violet, C.violet, C.cyan, C.cyan, C.pink, C.white];
+  nodes.forEach((p, i) => {
+    ng.attributes.position.setXYZ(i, p.x, p.y, p.z);
+    ng.attributes.aSize.setX(i, 0.35 + Math.random() * 0.7);
+    const col = pal[(Math.random() * pal.length) | 0].clone().multiplyScalar(0.5 + Math.random() * 0.4);
+    ng.attributes.aColor.setXYZ(i, col.r, col.g, col.b);
+  });
+  const nodeMat = glowMat(true);
+  scene.add(new THREE.Points(ng, nodeMat));
+
+  const edges = [];
+  for (let i = 0; i < N; i++) {
+    const near = [];
+    for (let j = i + 1; j < N; j++) {
+      const d = nodes[i].distanceToSquared(nodes[j]);
+      if (d < 42) near.push([d, j]);
+    }
+    near.sort((a, b) => a[0] - b[0]);
+    near.slice(0, 3).forEach(([, j]) => edges.push([nodes[i], nodes[j]]));
+  }
+  keyPos.forEach(k => {
+    nodes.map(p => [p.distanceToSquared(k), p])
+      .sort((a, b) => a[0] - b[0])
+      .slice(0, mobile ? 6 : 9)
+      .forEach(([, p]) => edges.push([k, p]));
+  });
+  const lp = new Float32Array(edges.length * 6);
+  const lc = new Float32Array(edges.length * 6);
+  edges.forEach(([a, b], i) => {
+    lp.set([a.x, a.y, a.z, b.x, b.y, b.z], i * 6);
+    const c1 = Math.random() < 0.5 ? C.violet : C.cyan;
+    lc.set([c1.r, c1.g, c1.b, C.violet.r, C.violet.g, C.violet.b], i * 6);
+  });
+  const lg = new THREE.BufferGeometry();
+  lg.setAttribute('position', new THREE.BufferAttribute(lp, 3));
+  lg.setAttribute('color', new THREE.BufferAttribute(lc, 3));
+  scene.add(new THREE.LineSegments(lg, new THREE.LineBasicMaterial({
+    vertexColors: true, transparent: true, opacity: 0.22,
+    blending: THREE.AdditiveBlending, depthWrite: false
+  })));
+
+  const TS = 900, RS = 6;
+  const additive = (color, opacity) => new THREE.MeshBasicMaterial({
+    color, transparent: true, opacity, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide
+  });
+  scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, TS, 0.02, RS, false), additive(0x6a5cff, 0.22)));
+  const litGeo = new THREE.TubeGeometry(curve, TS, 0.022, RS, false);
+  const glowGeo = new THREE.TubeGeometry(curve, TS, 0.075, RS, false);
+  const lit = new THREE.Mesh(litGeo, additive(0x5ef2ff, 0.95));
+  const litGlow = new THREE.Mesh(glowGeo, additive(0x5ef2ff, 0.1));
+  lit.frustumCulled = litGlow.frustumCulled = false;
+  scene.add(lit, litGlow);
+
+  const FX = 2 * K + 2;
+  const fg = pointsGeo(FX);
+  keyPos.forEach((p, i) => {
+    fg.attributes.position.setXYZ(i, p.x, p.y, p.z);
+    fg.attributes.position.setXYZ(K + i, p.x, p.y, p.z);
+  });
+  const fxMat = glowMat();
+  const fx = new THREE.Points(fg, fxMat);
+  fx.frustumCulled = false;
+  scene.add(fx);
+
+  const ringGeo = new THREE.RingGeometry(0.62, 0.64, 72);
+  const waveGeo = new THREE.RingGeometry(0.5, 0.512, 72);
+  const rings = keyPos.map(p => {
+    const r = new THREE.Mesh(ringGeo, additive(0x5ef2ff, 0));
+    const w = new THREE.Mesh(waveGeo, additive(0xff5fa2, 0));
+    r.position.copy(p);
+    w.position.copy(p);
+    scene.add(r, w);
+    return { r, w };
+  });
+
+  const S = mobile ? 40 : 80;
+  const sg = pointsGeo(S);
+  const sparks = [];
+  for (let i = 0; i < S; i++) {
+    sparks.push({ e: (Math.random() * edges.length) | 0, t: Math.random(), v: 0.25 + Math.random() * 0.6 });
+    sg.attributes.aSize.setX(i, 0.45 + Math.random() * 0.3);
+    const c = (Math.random() < 0.6 ? C.cyan : C.pink).clone().multiplyScalar(1.2);
+    sg.attributes.aColor.setXYZ(i, c.r, c.g, c.b);
+  }
+  const sparkMat = glowMat();
+  const sparkPts = new THREE.Points(sg, sparkMat);
+  sparkPts.frustumCulled = false;
+  scene.add(sparkPts);
+  const tmpV = new THREE.Vector3();
+  const updateSparks = dt => {
+    const pos = sg.attributes.position;
+    sparks.forEach((s, i) => {
+      s.t += s.v * dt;
+      if (s.t > 1) { s.t = 0; s.e = (Math.random() * edges.length) | 0; }
+      const [a, b] = edges[s.e];
+      tmpV.lerpVectors(a, b, s.t);
+      pos.setXYZ(i, tmpV.x, tmpV.y, tmpV.z);
+    });
+    pos.needsUpdate = true;
+  };
+  updateSparks(0);
+
+  const D = mobile ? 350 : 700;
+  const dg = pointsGeo(D);
+  const zMax = 30, zMin = last.z - 50;
+  for (let i = 0; i < D; i++) {
+    dg.attributes.position.setXYZ(i, (Math.random() - 0.5) * 90, (Math.random() - 0.5) * 60, lerp(zMin, zMax, Math.random()));
+    dg.attributes.aSize.setX(i, 0.12 + Math.random() * 0.2);
+    const c = C.violet.clone().lerp(C.cyan, Math.random()).multiplyScalar(0.35);
+    dg.attributes.aColor.setXYZ(i, c.r, c.g, c.b);
+  }
+  const dustMat = glowMat();
+  scene.add(new THREE.Points(dg, dustMat));
+
+  let anchors = [], sides = [], vs = [];
+  const measure = () => {
+    const m = innerWidth <= 760;
+    anchors = stages.map(s => Math.max(0, s.offsetTop + (s.offsetHeight - innerHeight) / 2));
+    sides = stages.map(s => (m ? 0 : ({ left: 1, right: -1, center: 0 }[s.dataset.side] || 0)));
+    vs = stages.map(s => (m ? 0.55 : s.dataset.side === 'center' ? 0.12 : 0));
+  };
+  measure();
+  new ResizeObserver(measure).observe(document.querySelector('main'));
+
+  const state = y => {
+    if (y <= anchors[0]) return [keyU[0], sides[0], vs[0]];
+    for (let i = 0; i < K - 1; i++) {
+      if (y < anchors[i + 1]) {
+        let f = (y - anchors[i]) / Math.max(1, anchors[i + 1] - anchors[i]);
+        f = f * f * (3 - 2 * f);
+        return [lerp(keyU[i], keyU[i + 1], f), lerp(sides[i], sides[i + 1], f), lerp(vs[i], vs[i + 1], f)];
+      }
+    }
+    return [keyU[K - 1], sides[K - 1], vs[K - 1]];
+  };
+
+  const back = 6.5 / L;
+  const init0 = state(scrollY);
+  const cur = reduce ? { u: init0[0], s: init0[1], v: init0[2] } : { u: back + 0.004, s: 0, v: init0[2] };
+  const mouse = { x: 0, y: 0, sx: 0, sy: 0 };
+  if (!reduce) {
+    addEventListener('pointermove', e => {
+      mouse.x = (e.clientX / innerWidth) * 2 - 1;
+      mouse.y = (e.clientY / innerHeight) * 2 - 1;
+    }, { passive: true });
+  }
+
+  addEventListener('resize', () => {
+    renderer.setSize(innerWidth, innerHeight, false);
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    measure();
+  });
+
+  const UP = new THREE.Vector3(0, 1, 0);
+  const dir = new THREE.Vector3(), right = new THREE.Vector3(), up = new THREE.Vector3();
+  const target = new THREE.Vector3();
+  const halfFov = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+  const clock = new THREE.Clock();
+  const glowMats = [nodeMat, fxMat, sparkMat, dustMat];
+
+  const frame = () => {
+    const dt = Math.min(clock.getDelta(), 0.05);
+    const t = clock.elapsedTime;
+    const [tu, ts, tv] = state(scrollY);
+    const k = reduce ? 1 : 1 - Math.exp(-dt * 3.2);
+    cur.u += (tu - cur.u) * k;
+    cur.s += (ts - cur.s) * k;
+    cur.v += (tv - cur.v) * k;
+    const km = 1 - Math.exp(-dt * 2);
+    mouse.sx += (mouse.x - mouse.sx) * km;
+    mouse.sy += (mouse.y - mouse.sy) * km;
+
+    const u = clamp01(cur.u);
+    const pulse = curve.getPointAt(u);
+    const cp = curve.getPointAt(Math.max(0, u - back));
+    cp.y += 2.1;
+    dir.subVectors(pulse, cp).normalize();
+    right.crossVectors(dir, UP).normalize();
+    up.crossVectors(right, dir);
+    camera.position.copy(cp).addScaledVector(right, 1.4 + mouse.sx * 0.7).addScaledVector(up, -mouse.sy * 0.45);
+    const dist = camera.position.distanceTo(pulse);
+    const hy = dist * halfFov, hx = hy * camera.aspect;
+    target.copy(pulse).addScaledVector(right, -cur.s * hx * 0.5).addScaledVector(up, -cur.v * hy);
+    camera.lookAt(target);
+
+    const seg = Math.floor(u * TS) * RS * 6;
+    litGeo.setDrawRange(0, seg);
+    glowGeo.setDrawRange(0, seg);
+
+    const pos = fg.attributes.position, size = fg.attributes.aSize, col = fg.attributes.aColor;
+    const tc = new THREE.Color();
+    for (let i = 0; i < K; i++) {
+      const act = Math.exp(-Math.pow(((u - keyU[i]) * L) / 5, 2));
+      const visited = u > keyU[i] - 0.002 ? 1 : 0;
+      size.setX(i, 1.6 + act * 1.8);
+      tc.copy(C.violet).lerp(C.cyan, Math.max(act, visited * 0.6)).multiplyScalar(0.8 + act * 1.2);
+      col.setXYZ(i, tc.r, tc.g, tc.b);
+      size.setX(K + i, 5 + act * 9);
+      tc.copy(C.cyan).multiplyScalar(0.1 + act * 0.35 + visited * 0.05);
+      col.setXYZ(K + i, tc.r, tc.g, tc.b);
+
+      const { r, w } = rings[i];
+      r.lookAt(camera.position);
+      w.lookAt(camera.position);
+      r.material.opacity = 0.07 + act * 0.7;
+      r.scale.setScalar(1 + act * 0.35 + (reduce ? 0 : Math.sin(t * 2.2) * 0.03 * act));
+      const ph = reduce ? 0.5 : (t * 0.55 + i * 0.37) % 1;
+      w.scale.setScalar(1 + ph * 2.6);
+      w.material.opacity = act * (1 - ph) * 0.55;
+    }
+    pos.setXYZ(2 * K, pulse.x, pulse.y, pulse.z);
+    pos.setXYZ(2 * K + 1, pulse.x, pulse.y, pulse.z);
+    size.setX(2 * K, 1.5);
+    size.setX(2 * K + 1, 6.5);
+    col.setXYZ(2 * K, 1.3, 1.35, 1.4);
+    col.setXYZ(2 * K + 1, C.cyan.r * 0.5, C.cyan.g * 0.5, C.cyan.b * 0.5);
+    pos.needsUpdate = size.needsUpdate = col.needsUpdate = true;
+
+    if (!reduce) updateSparks(dt);
+    glowMats.forEach(m => { m.uniforms.uTime.value = reduce ? 0 : t; });
+    nodeMat.uniforms.uPulse.value.copy(pulse);
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+}
+</script>
+</body>
+</html>
